@@ -9,8 +9,8 @@ services:
     startCommand: |
       cd ecommerce_project
       export PYTHONPATH=/opt/render/project/src
-      export DJANGO_SETTINGS_MODULE=ecommerce_project.ecommerce_project.settings
-      gunicorn ecommerce_project.wsgi:application --bind 0.0.0.0:$PORT --workers 4
+      export DJANGO_SETTINGS_MODULE=ecommerce_project.settings
+      gunicorn --chdir ecommerce_project ecommerce_project.wsgi:application --bind 0.0.0.0:$PORT --workers 4
     envVars:
       - key: PYTHON_VERSION
         value: 3.8.12
