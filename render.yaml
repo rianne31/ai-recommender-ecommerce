@@ -6,7 +6,7 @@ services:
       python -m pip install --upgrade pip setuptools wheel
       pip install -r requirements.txt --no-cache-dir --no-deps
       pip install -r requirements.txt --no-cache-dir
-    startCommand: gunicorn ecommerce_project.wsgi:application
+    startCommand: gunicorn --chdir ecommerce_project ecommerce_project.wsgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.8.12
@@ -20,4 +20,6 @@ services:
       - key: DEBUG
         value: "False"
       - key: DJANGO_SETTINGS_MODULE
-        value: ecommerce_project.settings 
+        value: ecommerce_project.settings
+      - key: PYTHONPATH
+        value: /opt/render/project/src/ecommerce_project 
