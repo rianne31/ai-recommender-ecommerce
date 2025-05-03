@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ai-recommender-ecommerce
+    env: python
+    buildCommand: |
+      python -m pip install --upgrade pip setuptools wheel
+      pip install -r requirements.txt --no-cache-dir --no-deps
+      pip install -r requirements.txt --no-cache-dir
+    startCommand: gunicorn ecommerce_project.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.8.12
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: MONGODB_URI
+        sync: false
+        required: true
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SETTINGS_MODULE
+        value: ecommerce_project.settings 
